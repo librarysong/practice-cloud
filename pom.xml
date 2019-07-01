@@ -25,6 +25,8 @@
 		<module>practice-eureka</module>
 		<module>practice-product</module>
 		<module>practice-consumer</module>
+		<module>practice-hystrix</module>
+		<module>practice-common</module>
 	</modules>
 
 	<dependencies>
