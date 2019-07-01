@@ -24,6 +24,7 @@
 	<modules>
 		<module>practice-eureka</module>
 		<module>practice-product</module>
+		<module>practice-consumer</module>
 	</modules>
 
 	<dependencies>
