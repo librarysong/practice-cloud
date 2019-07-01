@@ -23,7 +23,7 @@ public class User implements Serializable {
     private Long id;
 
     @TableField(fill = FieldFill.INSERT)
-    private Long status;
+    private Integer status;
 
     private String userName;
 
@@ -44,13 +44,15 @@ public class User implements Serializable {
     public void setId(Long id) {
         this.id = id;
     }
-    public Long getStatus() {
+
+    public Integer getStatus() {
         return status;
     }
 
-    public void setStatus(Long status) {
+    public void setStatus(Integer status) {
         this.status = status;
     }
+
     public String getUserName() {
         return userName;
     }

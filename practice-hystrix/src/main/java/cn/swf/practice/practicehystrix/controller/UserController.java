@@ -32,6 +32,7 @@ public class UserController {
 
     @RequestMapping("/add")
     public String addUser(@NotBlank String userName, @NotBlank String password) {
+        log.info("进入添加方法");
         User user = new User();
         user.setUserName(userName);
         user.setPassWord(password);
@@ -41,14 +42,15 @@ public class UserController {
     }
 
     @RequestMapping("/getuser")
-    public String getUser(@NotBlank Long id) {
-        User user = iUserService.getById(id);
+    public String getUser(Integer id) {
+        User user = iUserService.findUser(id);
         return JsonResultUtil.getSuccessJson(user).toJSONString();
     }
 
     @RequestMapping("/getlist")
     public String getList() {
         List<User> list = iUserService.list();
+        log.info("查询出的数据:", list.toString());
         return JsonResultUtil.getSuccessJson(list).toJSONString();
     }
 

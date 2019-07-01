@@ -18,7 +18,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IUserService {
 
-    User findUser(Long id) {
+    @Override
+    public User findUser(long id) {
         return this.getOne(new QueryWrapper<User>().eq("id", id));
     }
 }
