@@ -23,6 +23,7 @@
 
 	<modules>
 		<module>practice-eureka</module>
+		<module>practice-product</module>
 	</modules>
 
 	<dependencies>
