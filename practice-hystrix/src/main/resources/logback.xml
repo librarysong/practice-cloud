@@ -9,9 +9,15 @@
             <level>DEBUG</level>
         </filter>
     </appender>
+
     <logger name="org.springframework.web" level="INFO" additivity="false">
         <appender-ref ref="STDOUT"/>
     </logger>
+
+    <logger name="com.baomidou.mybatisplus" level="INFO" additivity="false">
+        <appender-ref ref="STDOUT"/>
+    </logger>
+
     <root level="INFO">
         <appender-ref ref="STDOUT"/>
     </root>

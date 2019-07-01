@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+    <settings>
+        <!-- 设置超时时间，它决定驱动等待数据库响应的秒数 -->
+        <!-- 预防慢SQL消耗尽数据库连接池 -->
+        <setting name="defaultStatementTimeout" value="25" />
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+    </settings>
+</configuration>
