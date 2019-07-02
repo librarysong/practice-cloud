@@ -31,6 +31,8 @@ public enum CodeEnum {
     /***
      * 参数错误
      */
+
+
     ERROR_PARMS("0005", "参数错误"),
     /**
      * 手机号格式错误
