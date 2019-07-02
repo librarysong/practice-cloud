@@ -50,7 +50,7 @@ public class UserController {
     @RequestMapping("/getlist")
     public String getList() {
         List<User> list = iUserService.list();
-        log.info("查询出的数据:", list.toString());
+        log.info("查询出的数据:{}",list.toString());
         return JsonResultUtil.getSuccessJson(list).toJSONString();
     }
 

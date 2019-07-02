@@ -14,7 +14,7 @@
         <appender-ref ref="STDOUT"/>
     </logger>
 
-    <logger name="com.baomidou.mybatisplus" level="INFO" additivity="false">
+    <logger name="com.baomidou.mybatisplus" level="DEBUG" additivity="false">
         <appender-ref ref="STDOUT"/>
     </logger>
 
