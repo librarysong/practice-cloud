@@ -7,10 +7,14 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisStandaloneConfiguration;
+import org.springframework.data.redis.connection.lettuce.LettuceClientConfiguration;
 import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory;
+import org.springframework.data.redis.connection.lettuce.LettucePoolingClientConfiguration;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.RedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
+
+import java.time.Duration;
 
 /**
  * Created by 宋维飞
@@ -29,6 +33,8 @@ public class RedisStandaloneConfig {
     private String password;
     @Value("${redis.custom.dbindex}")
     private Integer dbIndex;
+    @Value("${redis.custom.timeout}")
+    private long timeout;
 
     public LettuceConnectionFactory lettuceConnectionFactory(GenericObjectPoolConfig localPoolConfig) {
         RedisStandaloneConfiguration redisStandaloneConfiguration = new RedisStandaloneConfiguration();
@@ -36,10 +42,25 @@ public class RedisStandaloneConfig {
         redisStandaloneConfiguration.setPort(port);
         redisStandaloneConfiguration.setPassword(password);
         redisStandaloneConfiguration.setDatabase(dbIndex);
-        LettuceConnectionFactory lettuceConnectionFactorynew = new LettuceConnectionFactory(
-                redisStandaloneConfiguration);
+
+        // 集群版配置
+//        RedisClusterConfiguration redisClusterConfiguration = new RedisClusterConfiguration();
+//        String[] serverArray = clusterNodes.split(",");
+//        Set<RedisNode> nodes = new HashSet<RedisNode>();
+//        for (String ipPort : serverArray) {
+//            String[] ipAndPort = ipPort.split(":");
+//            nodes.add(new RedisNode(ipAndPort[0].trim(), Integer.valueOf(ipAndPort[1])));
+//        }
+//        redisClusterConfiguration.setPassword(RedisPassword.of(password));
+//        redisClusterConfiguration.setClusterNodes(nodes);
+//        redisClusterConfiguration.setMaxRedirects(maxRedirects);
+        LettuceClientConfiguration clientConfig = LettucePoolingClientConfiguration.builder()
+                .commandTimeout(Duration.ofMillis(timeout))
+                .poolConfig(localPoolConfig)
+                .build();
+        LettuceConnectionFactory factory = new LettuceConnectionFactory(redisStandaloneConfiguration,clientConfig);
         log.info("创建LettuceConnectionFactory成功");
-        return lettuceConnectionFactorynew;
+        return factory;
     }
 
     @Bean
