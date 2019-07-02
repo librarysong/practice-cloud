@@ -2,6 +2,7 @@ package cn.swf.practice.practicehystrix.config;
 
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
@@ -20,6 +21,7 @@ public class LogAspect {
     public void controllerLog() {
     }
 
+    @Around("controllerLog()")
     public Object doAround(ProceedingJoinPoint joinPoint) throws Throwable {
         long start = System.currentTimeMillis();
         MethodSignature ms = (MethodSignature) joinPoint.getSignature();

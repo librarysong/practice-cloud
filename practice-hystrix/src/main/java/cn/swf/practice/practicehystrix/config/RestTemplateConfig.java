@@ -16,9 +16,10 @@ import org.springframework.web.client.RestTemplate;
 @Slf4j
 public class RestTemplateConfig {
 
+
     @Bean(name = "httpRequestFactory")
-    public ClientHttpRequestFactory httpRequestFactory(){
-        HttpComponentsClientHttpRequestFactory factory=new HttpComponentsClientHttpRequestFactory();
+    public ClientHttpRequestFactory httpRequestFactory() {
+        HttpComponentsClientHttpRequestFactory factory = new HttpComponentsClientHttpRequestFactory();
         factory.setReadTimeout(3000);
         factory.setConnectTimeout(3000);
         log.info("RestTemplateConfig success");
@@ -26,7 +27,7 @@ public class RestTemplateConfig {
     }
 
     @Bean(name = "restTemplate")
-    public RestTemplate restTemplate(@Qualifier(value = "httpRequestFactory") ClientHttpRequestFactory factory){
+    public RestTemplate restTemplate(@Qualifier(value = "httpRequestFactory") ClientHttpRequestFactory factory) {
         return new RestTemplate(factory);
     }
 }
