@@ -27,6 +27,7 @@
 		<module>practice-consumer</module>
 		<module>practice-hystrix</module>
 		<module>practice-common</module>
+		<module>practice-zuul</module>
 	</modules>
 
 	<dependencies>
