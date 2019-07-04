@@ -28,6 +28,7 @@
 		<module>practice-hystrix</module>
 		<module>practice-common</module>
 		<module>practice-zuul</module>
+		<module>practice-admin</module>
 	</modules>
 
 	<dependencies>
