@@ -24,4 +24,16 @@ public class RedisTest extends ApplicationWebTest {
         mockMvc.perform(MockMvcRequestBuilders.post("/redis/get")).andExpect(MockMvcResultMatchers.status().is2xxSuccessful())
                 .andDo(MockMvcResultHandlers.print());
     }
+
+    @Test
+    public void testOrder() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.post("/saveRedis")).andExpect(MockMvcResultMatchers.status().is2xxSuccessful())
+                .andDo(MockMvcResultHandlers.print());
+    }
+
+    @Test
+    public void getOrder() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.post("/getRedis")).andExpect(MockMvcResultMatchers.status().is2xxSuccessful())
+                .andDo(MockMvcResultHandlers.print());
+    }
 }
