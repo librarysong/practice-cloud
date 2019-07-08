@@ -25,4 +25,16 @@ public class UserListTest extends ApplicationWebTest {
                 .andDo(MockMvcResultHandlers.print());
     }
 
+    @Test
+    public void mapTestPerson() throws  Exception{
+        mockMvc.perform(MockMvcRequestBuilders.post("/user/mapList").param("type","person--userList").param("userName","张三")).andExpect(MockMvcResultMatchers.status().is2xxSuccessful())
+                .andDo(MockMvcResultHandlers.print());
+    }
+
+    @Test
+    public void mapTestMaster() throws  Exception{
+        mockMvc.perform(MockMvcRequestBuilders.post("/user/mapList").param("type","master--userList").param("userName","李四")).andExpect(MockMvcResultMatchers.status().is2xxSuccessful())
+                .andDo(MockMvcResultHandlers.print());
+    }
+
 }

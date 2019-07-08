@@ -10,8 +10,10 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.annotation.Resource;
 import javax.validation.constraints.NotBlank;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by 宋维飞
@@ -26,6 +28,15 @@ public class UserListController {
     @Autowired
     private ApplicationContext applicationContext;
 
+    @Resource
+    private Map<String, UserListService> userListServiceMap;
+
+    /**
+     * 使用application.getBean方式
+     * @param type
+     * @param user
+     * @return
+     */
     @RequestMapping("/list")
     public String chainUser(@NotBlank String type, User user) {
         log.info("请求入参 type:{} user:{}", type, user.toString());
@@ -33,4 +44,19 @@ public class UserListController {
         List<User> userList = listService.queryUserList(user);
         return JsonResultUtil.getSuccessJson(userList).toJSONString();
     }
+
+    /**
+     * 使用map映射方式
+     * @param type
+     * @param user
+     * @return
+     */
+    @RequestMapping("/mapList")
+    public String mapUser(@NotBlank String type, User user) {
+        log.info("map请求入参 type:{} user:{}", type, user.toString());
+        UserListService listService = userListServiceMap.get(type);
+        List<User> userList = listService.queryUserList(user);
+        return JsonResultUtil.getSuccessJson(userList).toJSONString();
+    }
+
 }
