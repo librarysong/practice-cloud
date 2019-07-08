@@ -29,6 +29,7 @@
 		<module>practice-common</module>
 		<module>practice-zuul</module>
 		<module>practice-admin</module>
+		<module>practice-master</module>
 	</modules>
 
 	<dependencies>
