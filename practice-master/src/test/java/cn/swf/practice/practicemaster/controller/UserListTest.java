@@ -37,4 +37,9 @@ public class UserListTest extends ApplicationWebTest {
                 .andDo(MockMvcResultHandlers.print());
     }
 
+    @Test
+    public void testException() throws  Exception{
+        mockMvc.perform(MockMvcRequestBuilders.post("/user/testException")).andExpect(MockMvcResultMatchers.status().is2xxSuccessful())
+                .andDo(MockMvcResultHandlers.print());
+    }
 }

@@ -4,6 +4,7 @@ package cn.swf.practice.practicemaster.controller;
 import cn.swf.practice.pracricecommon.utils.JsonResultUtil;
 import cn.swf.practice.practicemaster.entity.User;
 import cn.swf.practice.practicemaster.service.IUserService;
+import com.alibaba.fastjson.JSON;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
@@ -52,6 +53,17 @@ public class UserController {
         List<User> list = iUserService.list();
         log.info("查询出的数据:{}", list.toString());
         return JsonResultUtil.getSuccessJson(list).toJSONString();
+    }
+
+    @RequestMapping("testException")
+    public String testException(){
+        try {
+            iUserService.testException();
+            return JsonResultUtil.getSuccessJson().toJSONString("成功");
+        }catch (Exception e){
+            log.error("controller异常;");
+        }
+        return JsonResultUtil.getSuccessJson().toJSONString("未获取到信息");
     }
 
 }
