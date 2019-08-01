@@ -9,7 +9,6 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 @SpringBootApplication
 @EnableDiscoveryClient
 @EnableCircuitBreaker
-@MapperScan("cn.swf.practice.practicemaster.mapper")
 public class PracticeMasterApplication {
 
 	public static void main(String[] args) {
