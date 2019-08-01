@@ -20,7 +20,6 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Primary;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
@@ -32,35 +31,31 @@ import java.util.List;
 
 /**
  * Created by 宋维飞
- * 2019/7/1 15:35
+ * 2019/8/1 10:21
  */
 @Configuration
-@MapperScan(value = "cn.swf.practice.practicemaster.mapper*", sqlSessionFactoryRef = "practiceSqlSessionFactory")
 @Slf4j
-public class DataSourceConfig {
+@MapperScan(value = "cn.swf.practice.practicemaster.book.mapper*", sqlSessionFactoryRef = "bookSqlSessionFactory")
+public class BookDataSourceConfig {
 
-    @Bean("practice")
-    @Primary
-    @ConfigurationProperties(prefix = "practice.datasource")
+    @Bean("book")
+    @ConfigurationProperties(prefix = "book.datasource")
     public DataSource dataSourceInit() {
-        log.info("#################### practice mysqlDatasource create success! ####################");
+        log.info("#################### book mysqlDatasource create success! ####################");
         return DataSourceBuilder.create().type(HikariDataSource.class).build();
     }
 
-    @Bean("practiceJdbcTemplate")
-    @Primary
-    public JdbcTemplate getJdbcTemplate(@Qualifier("practice") DataSource dataSource) {
+    @Bean("bookJdbcTemplate")
+    public JdbcTemplate getJdbcTemplate(@Qualifier("book") DataSource dataSource) {
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
         jdbcTemplate.setQueryTimeout(20);
         return jdbcTemplate;
     }
 
-    @Bean
     public OptimisticLockerInterceptor optimisticLockerInterceptor() {
         return new OptimisticLockerInterceptor();
     }
 
-    @Bean
     public PaginationInterceptor paginationInterceptor() {
         PaginationInterceptor paginationInterceptor = new PaginationInterceptor();
         List<ISqlParser> sqlParserList = new ArrayList<>();
@@ -70,15 +65,14 @@ public class DataSourceConfig {
         return paginationInterceptor;
     }
 
-    @Bean("practiceSqlSessionFactory")
-    @Primary
-    public SqlSessionFactory sqlSessionFactory(@Qualifier("practice") DataSource dataSource) throws Exception {
+    @Bean("bookSqlSessionFactory")
+    public SqlSessionFactory sqlSessionFactory(@Qualifier("book") DataSource dataSource) throws Exception {
         MybatisSqlSessionFactoryBean fb = new MybatisSqlSessionFactoryBean();
         fb.setDataSource(dataSource);
-        fb.setTypeAliasesPackage("com.swf.practice.practicemaster.entity");
+        fb.setTypeAliasesPackage("com.swf.practice.practicemaster.book.entity");
         MybatisConfiguration mybatisConfiguration = new MybatisConfiguration();
         fb.setConfiguration(mybatisConfiguration);
-        fb.setMapperLocations(new PathMatchingResourcePatternResolver().getResources("classpath:mybatis/practice/*.xml"));
+        fb.setMapperLocations(new PathMatchingResourcePatternResolver().getResources("classpath:mybatis/book/*.xml"));
         fb.setPlugins(new Interceptor[]{optimisticLockerInterceptor(), paginationInterceptor()});
         MetaObjectHandler metaObjectHandler = new ComMetaObjectHandler();
         GlobalConfig globalConfig = GlobalConfigUtils.defaults();
@@ -87,15 +81,13 @@ public class DataSourceConfig {
         return fb.getObject();
     }
 
-    @Bean("practiceSqlSessionTemplate")
-    @Primary
-    public SqlSessionTemplate sqlSessionTemplate(@Qualifier("practiceSqlSessionFactory") SqlSessionFactory sqlSessionFactory) {
+    @Bean("bookSqlSessionTemplate")
+    public SqlSessionTemplate sqlSessionTemplate(@Qualifier("bookSqlSessionFactory") SqlSessionFactory sqlSessionFactory) {
         return new SqlSessionTemplate(sqlSessionFactory);
     }
 
-    @Bean("practicePlatformTransactionManager")
-    @Primary
-    public PlatformTransactionManager txManager(@Qualifier("practice") DataSource dataSource) {
+    @Bean("bookPlatformTransactionManager")
+    public PlatformTransactionManager txManager(@Qualifier("book") DataSource dataSource) {
         return new DataSourceTransactionManager(dataSource);
     }
 
