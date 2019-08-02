@@ -40,6 +40,11 @@
             <version>2.1.0.RELEASE</version>
         </dependency>
 
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-openfeign</artifactId>
+		</dependency>
+
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-hystrix</artifactId>
@@ -95,16 +100,16 @@
 			<version>2.3.28</version>
 		</dependency>
 
-		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-openfeign-core</artifactId>
-			<version>2.0.0.RELEASE</version>
-		</dependency>
+		<!--<dependency>-->
+			<!--<groupId>org.springframework.cloud</groupId>-->
+			<!--<artifactId>spring-cloud-openfeign-core</artifactId>-->
+			<!--<version>2.0.0.RELEASE</version>-->
+		<!--</dependency>-->
 
-		<dependency>
-			<groupId>io.github.openfeign</groupId>
-			<artifactId>feign-okhttp</artifactId>
-		</dependency>
+		<!--<dependency>-->
+			<!--<groupId>io.github.openfeign</groupId>-->
+			<!--<artifactId>feign-okhttp</artifactId>-->
+		<!--</dependency>-->
 
 		<dependency>
 			<groupId>org.apache.commons</groupId>

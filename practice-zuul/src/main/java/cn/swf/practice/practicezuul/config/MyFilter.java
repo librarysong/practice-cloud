@@ -46,6 +46,7 @@ public class MyFilter extends ZuulFilter {
             } catch (Exception e) {
                 return null;
             }
+            return null;
         }
         log.info("ok");
         return null;
