@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.data.redis.connection.RedisStandaloneConfiguration;
 import org.springframework.data.redis.connection.lettuce.LettuceClientConfiguration;
 import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory;
@@ -58,7 +59,7 @@ public class RedisStandaloneConfig {
                 .commandTimeout(Duration.ofMillis(timeout))
                 .poolConfig(localPoolConfig)
                 .build();
-        LettuceConnectionFactory factory = new LettuceConnectionFactory(redisStandaloneConfiguration,clientConfig);
+        LettuceConnectionFactory factory = new LettuceConnectionFactory(redisStandaloneConfiguration, clientConfig);
         log.info("创建LettuceConnectionFactory成功");
         return factory;
     }
@@ -74,8 +75,9 @@ public class RedisStandaloneConfig {
     }
 
     @Bean
-    public <K, V> RedisTemplate<K, V> redisTemplate() {
-        RedisTemplate<K, V> redisTemplate = new RedisTemplate<>();
+    @Primary
+    public RedisTemplate<String, String> redisTemplate() {
+        RedisTemplate<String, String> redisTemplate = new RedisTemplate<>();
         redisTemplate.setConnectionFactory(lettuceConnectionFactory(localPoolConfig()));
 
         redisTemplate.setDefaultSerializer(new StringRedisSerializer());
@@ -86,6 +88,14 @@ public class RedisStandaloneConfig {
         redisTemplate.setHashKeySerializer(stringSerializer);
         redisTemplate.setHashValueSerializer(stringSerializer);
         log.info("#######################create RedisTemplate success");
+        return redisTemplate;
+    }
+
+    @Bean("redisTemplateT")
+    public <K, V> RedisTemplate<K, V> redisTemplateT() {
+        RedisTemplate<K, V> redisTemplate = new RedisTemplate<>();
+        redisTemplate.setConnectionFactory(lettuceConnectionFactory(localPoolConfig()));
+        // RedisAutoConfiguration
         return redisTemplate;
     }
 
