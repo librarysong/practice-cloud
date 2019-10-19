@@ -3,6 +3,8 @@ package cn.swf.practice.practicemaster.service;
 import cn.swf.practice.practicemaster.entity.User;
 import com.baomidou.mybatisplus.extension.service.IService;
 
+import java.util.Optional;
+
 /**
  * <p>
  * 服务类
@@ -16,4 +18,6 @@ public interface IUserService extends IService<User> {
     User findUser(long id);
 
     User testException() throws  Exception;
+
+    Optional<User> getUserById(long id);
 }
