@@ -8,6 +8,8 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 /**
  * <p>
  * 服务实现类
@@ -35,5 +37,10 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
             log.info("发生异常:", e);
             throw new RuntimeException("调用dubbo出现错误");
         }
+    }
+
+    @Override
+    public Optional<User> getUserById(long id) {
+        return Optional.ofNullable(this.getOne(new QueryWrapper<User>().eq("id",id)));
     }
 }

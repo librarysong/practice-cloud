@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.constraints.NotBlank;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * <p>
@@ -46,6 +47,12 @@ public class UserController {
     public String getUser(Integer id) {
         User user = iUserService.findUser(id);
         return JsonResultUtil.getSuccessJson(user).toJSONString();
+    }
+
+    @RequestMapping("/getuser")
+    public String getUserByOptional(Integer id) {
+        Optional<User> user = iUserService.getUserById(id);
+        return JsonResultUtil.getSuccessJson(user.orElseThrow(()-> new RuntimeException("用户不存在"))).toJSONString();
     }
 
     @RequestMapping("/getlist")
