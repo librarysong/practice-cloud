@@ -49,7 +49,7 @@ public class UserController {
         return JsonResultUtil.getSuccessJson(user).toJSONString();
     }
 
-    @RequestMapping("/getuser")
+    @RequestMapping("/getuserop")
     public String getUserByOptional(Integer id) {
         Optional<User> user = iUserService.getUserById(id);
         return JsonResultUtil.getSuccessJson(user.orElseThrow(()-> new RuntimeException("用户不存在"))).toJSONString();

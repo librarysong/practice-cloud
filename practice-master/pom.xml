@@ -121,6 +121,11 @@
 			<artifactId>spring-boot-starter-actuator</artifactId>
 		</dependency>
 
+		<dependency>
+			<groupId>com.github.liuhuagui</groupId>
+			<artifactId>gridexcel</artifactId>
+			<version>2.2</version>
+		</dependency>
 
 	</dependencies>
 

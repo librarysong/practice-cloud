@@ -6,3 +6,5 @@ practice-master/practice-master.iml
 *.iml
 *.zip
 *.xlsx
+practice-master/target/
+practice-common/target/
