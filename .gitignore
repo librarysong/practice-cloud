@@ -4,7 +4,5 @@ practice-cloud.iml
 practice-admin/practice-admin.iml
 practice-master/practice-master.iml
 *.iml
-*.zip
-*.xlsx
 practice-master/target/
 practice-common/target/
