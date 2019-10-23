@@ -1,5 +1,6 @@
 package cn.swf.practice.practicemaster.controller;
 
+import cn.hutool.crypto.digest.MD5;
 import cn.swf.practice.pracricecommon.utils.JsonResultUtil;
 import cn.swf.practice.practicemaster.book.entity.TUser;
 import cn.swf.practice.practicemaster.book.mapper.TUserMapper;
@@ -11,6 +12,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 
 /**
  * Created by 宋维飞
@@ -71,4 +76,18 @@ public class IndexController {
         String feignTest = testFeign.hello(name);
         return JsonResultUtil.getSuccessJson(feignTest).toJSONString();
     }
+
+    public static void main(String[] args) {
+        String queryString = appendQueryString();
+        System.out.println(queryString);
+    }
+
+    private static String appendQueryString() {
+        Map<String, String> params = new HashMap<>();
+        params.put("uuid", UUID.randomUUID().toString());
+        params.put("sign", new MD5().digestHex("test"));
+        return "https://www.baidu.com" + params.entrySet().stream().map(i -> i.getKey() + "=" + i.getValue()).reduce((p1, p2) -> p1 + "&" + p2).map(s -> "?" + s).orElse("");
+    }
+
+
 }
