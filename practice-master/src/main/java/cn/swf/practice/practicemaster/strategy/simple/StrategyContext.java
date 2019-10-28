@@ -6,11 +6,12 @@ package cn.swf.practice.practicemaster.strategy.simple;
  */
 public class StrategyContext {
     private IStrategy strategy;
-    public StrategyContext(IStrategy strategy){
-        this.strategy=strategy;
+
+    public StrategyContext(IStrategy strategy) {
+        this.strategy = strategy;
     }
 
-    public  void  contextMethod(){
+    public void contextMethod() {
         strategy.algorithmMethod();
     }
 }
