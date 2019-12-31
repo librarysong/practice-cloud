@@ -44,6 +44,20 @@ public class RedisStandaloneConfig {
         redisStandaloneConfiguration.setPassword(password);
         redisStandaloneConfiguration.setDatabase(dbIndex);
 
+        //哨兵版配置
+//        RedisSentinelConfiguration redisSentinelConfiguration=new RedisSentinelConfiguration();
+//
+//        String[] serverArray=new String[]{"192.168.1.1:6379,192.169.1.1:6379"};
+//        Set<RedisNode> nodes=new HashSet<>();
+//        for (String ipPort:serverArray){
+//            String[] ipAndPort = ipPort.split(",");
+//            nodes.add(new RedisNode(ipAndPort[0].trim(),Integer.valueOf(ipAndPort[1].trim())));
+//        }
+//        redisSentinelConfiguration.setSentinels(nodes);
+//        redisSentinelConfiguration.setPassword(password);
+//        redisSentinelConfiguration.setMaster("myMaster");
+
+
         // 集群版配置
 //        RedisClusterConfiguration redisClusterConfiguration = new RedisClusterConfiguration();
 //        String[] serverArray = clusterNodes.split(",");
@@ -59,7 +73,7 @@ public class RedisStandaloneConfig {
                 .commandTimeout(Duration.ofMillis(timeout))
                 .poolConfig(localPoolConfig)
                 .build();
-        LettuceConnectionFactory factory = new LettuceConnectionFactory(redisStandaloneConfiguration,clientConfig);
+        LettuceConnectionFactory factory = new LettuceConnectionFactory(redisStandaloneConfiguration, clientConfig);
         log.info("创建LettuceConnectionFactory成功");
         return factory;
     }
