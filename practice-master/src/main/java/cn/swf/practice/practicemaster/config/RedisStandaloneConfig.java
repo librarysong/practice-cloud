@@ -37,6 +37,7 @@ public class RedisStandaloneConfig {
     @Value("${redis.custom.timeout}")
     private long timeout;
 
+    @Bean
     public LettuceConnectionFactory lettuceConnectionFactory(GenericObjectPoolConfig localPoolConfig) {
         RedisStandaloneConfiguration redisStandaloneConfiguration = new RedisStandaloneConfiguration();
         redisStandaloneConfiguration.setHostName(host);
