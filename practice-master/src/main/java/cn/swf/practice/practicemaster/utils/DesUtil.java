@@ -309,8 +309,4 @@ public class DesUtil {
         SecretKey secretKey = keyFactory.generateSecret(dks);
         return secretKey;
     }
-
-    public static void main(String[] args) {
-        System.out.println("111");
-    }
 }
