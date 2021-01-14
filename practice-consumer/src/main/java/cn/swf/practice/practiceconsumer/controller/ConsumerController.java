@@ -23,4 +23,8 @@ public class ConsumerController {
         log.info("consumer...." + name);
         return helloRemote.hello(name);
     }
+
+    public static void main(String[] args) {
+
+    }
 }
